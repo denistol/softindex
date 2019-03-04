@@ -1,0 +1,6 @@
+.vscode
+node_modules
+prod-config.js
+bundle.js
+package-lock.json
+bundle.js
