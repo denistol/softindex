@@ -66,12 +66,23 @@ class App extends Component {
         this.setState({ error: msg })
         setTimeout(() => this.setState({ error: null }), 3000)
     }
+    validateInput(type, str) {
+        let pattern = /\d{1,2}/
+        if (type == 'tel') {
+            pattern = /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/
+        }
+        if (type == 'text') {
+            pattern = /^[a-zA-Zа-яА-Я ]+$/
+        }
+        return pattern.test(str)
+
+    }
     checkInput(props) {
         this.setState((state) => ({
             inputParams: state.inputParams.map(el => {
                 if (el.name == props.name) { // validate
                     el.data = props.value
-                    if (props.value.length > 5) {
+                    if (this.validateInput(el.type, el.data)) {
                         el.isValid = true
                     }
                 }
